@@ -1,65 +1,72 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import Link from "next/link";
+import { Leaf, TrendingUp, Users, Gift, BarChart3, Shield, Upload } from "lucide-react";
+import { motion } from "framer-motion";
+
+const features = [
+  { icon: BarChart3, title: "ESG Scoring", desc: "Score every transaction against 100+ companies with verified ESG data" },
+  { icon: TrendingUp, title: "Track Progress", desc: "See your sustainability score trend over time with detailed breakdowns" },
+  { icon: Gift, title: "Earn Rewards", desc: "Earn points for sustainable spending — redeem for carbon offsets and more" },
+  { icon: Users, title: "Community", desc: "Compare your score on the leaderboard and join sustainability streaks" },
+  { icon: Upload, title: "Easy Upload", desc: "Upload bank transactions via CSV or enter them manually" },
+  { icon: Shield, title: "Brand Portal", desc: "Banks and brands get analytics, rewards management, and white-label" },
+];
+
+export default function HomePage() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <div className="min-h-screen">
+      <section className="max-w-5xl mx-auto px-4 pt-24 pb-16 text-center">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
+            <Leaf className="w-4 h-4" />
+            ESG Customer Engagement Platform
+          </div>
+          <h1 className="text-4xl sm:text-6xl font-bold tracking-tight mb-6">
+            Know the impact of
+            <br />
+            <span className="text-primary">every dollar you spend</span>
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+          <p className="text-lg text-muted max-w-2xl mx-auto mb-10">
+            ESG Mesh scores your transactions against real ESG data from 100+ companies.
+            Earn points for sustainable choices, track your progress, and redeem rewards.
+          </p>
+          <div className="flex items-center justify-center gap-4">
+            <Link href="/dashboard" className="px-6 py-3 bg-primary hover:bg-primary-hover text-white rounded-xl font-medium transition-colors">
+              View Dashboard
+            </Link>
+            <Link href="/upload" className="px-6 py-3 border border-border hover:bg-card-hover rounded-xl font-medium transition-colors">
+              Upload Transactions
+            </Link>
+          </div>
+        </motion.div>
+      </section>
+
+      <section className="max-w-5xl mx-auto px-4 pb-24">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {features.map((f, i) => (
+            <motion.div
+              key={f.title}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.1 * i }}
+              className="bg-card border border-border rounded-xl p-5 hover:border-primary/30 transition-colors"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+              <f.icon className="w-8 h-8 text-primary mb-3" />
+              <h3 className="font-semibold mb-1">{f.title}</h3>
+              <p className="text-sm text-muted">{f.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      <section className="border-t border-border py-12">
+        <div className="max-w-5xl mx-auto px-4 text-center">
+          <p className="text-sm text-muted">
+            Built for banks and brands who want to boost customer engagement through sustainability.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+      </section>
     </div>
   );
 }
